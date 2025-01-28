@@ -1,6 +1,5 @@
 import pandas as pd
 import sys
-import json
 
 
 def csv_to_json(file_path, json_path):
