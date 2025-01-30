@@ -1,11 +1,12 @@
 import pandas as pd
 import sys
-
+import os
 
 def find_duplicates(file_path, column_name):
     """
     This function reads a CSV file and checks for duplicate values in a specified column,
-    filtering out NaN values in the process.
+    filtering out NaN values in the process and writing duplicate entries to a new CSV file
+    in the 'output' directory.
 
     Parameters:
     - file_path: str, path to the CSV file
@@ -28,13 +29,19 @@ def find_duplicates(file_path, column_name):
         if duplicate_rows.empty:
             print(f"No duplicates found in the column '{column_name}'.")
         else:
-            print("Duplicate rows found:")
+            output_dir = "output"
+            os.makedirs(output_dir, exist_ok=True)
+            output_file_path = os.path.join(output_dir, "duplicates.csv")
+
+            print(f"Duplicate rows found and written to '{output_file_path}':")
             grouped_duplicates = duplicate_rows.sort_values(by=column_name)
-            print(grouped_duplicates[[column_name, "name"]])
+            grouped_duplicates.to_csv(output_file_path, index=False)
+            print(
+                grouped_duplicates[[column_name, "name"]]  # Ensure you have a column named 'name' in your CSV
+            )
 
     except Exception as e:
         print(f"An error occurred: {e}")
-
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
