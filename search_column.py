@@ -26,7 +26,9 @@ def search_column(file_path, column_name, query, output_path=None):
             return
 
         # Filtering data to find rows where the column contains the query
-        matching_rows = data[data[column_name].str.contains(query, na=False)]
+        matching_rows = data[
+            data[column_name].str.contains(query, case=False, na=False)
+        ]
 
         if matching_rows.empty:
             print(f"No rows found containing '{query}' in column '{column_name}'.")
