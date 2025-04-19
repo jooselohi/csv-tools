@@ -5,7 +5,15 @@ import argparse
 def find_and_delete(file_path, column_name, value_to_delete, output_path):
     try:
         # Read the CSV file
-        data = pd.read_csv(file_path)
+        data = pd.read_csv(
+            file_path,
+            dtype={
+                "business_id": str,
+                "id": str,
+                "phone_number": str,
+                "phone_number": str,
+            },
+        )
 
         if column_name not in data.columns:
             print(f"Column '{column_name}' does not exist in the CSV file.")
@@ -26,6 +34,9 @@ def find_and_delete(file_path, column_name, value_to_delete, output_path):
             print(
                 f"No rows found containing '{value_to_delete}' in column '{column_name}'."
             )
+            # Save the modified DataFrame to the output file
+            data.to_csv(output_path, index=False)
+            print(f"Modified data saved to {output_path} \033[92m✓\033[39m")
         else:
             print(
                 f"Removed {removed_row_count} row(s) containing '{value_to_delete}' in column '{column_name}'."

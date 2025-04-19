@@ -16,7 +16,9 @@ def count_column_values(input_file, column_name, output_file):
     - Saves the counts of each unique value in the specified column to an output CSV file.
     """
     try:
-        data = pd.read_csv(input_file)
+        data = pd.read_csv(
+            input_file, dtype={"business_id": str, "id": str, "phone_number": str}
+        )
         if column_name not in data.columns:
             print(f"Column '{column_name}' does not exist in the CSV file.")
             return

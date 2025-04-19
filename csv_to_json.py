@@ -15,7 +15,9 @@ def csv_to_json(file_path, json_path):
     """
     try:
         # Reading the CSV file
-        data = pd.read_csv(file_path)
+        data = pd.read_csv(
+            file_path, dtype={"business_id": str, "id": str, "phone_number": str}
+        )
 
         # Converting to JSON format
         json_data = data.to_json(orient="records")

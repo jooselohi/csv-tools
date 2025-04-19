@@ -11,7 +11,9 @@ def change_column_header(input_file, old_header, new_header, output_file):
     - Saves the data with the modified column header to an output CSV file.
     """
     try:
-        data = pd.read_csv(input_file)
+        data = pd.read_csv(
+            input_file, dtype={"business_id": str, "id": str, "phone_number": str}
+        )
 
         if old_header not in data.columns:
             print(f"Column '{old_header}' does not exist in the CSV file.")

@@ -18,7 +18,9 @@ def filter_date_range(input_file, date_column, start_date, end_date, output_file
     - Saves filtered rows to a new CSV file.
     """
     try:
-        data = pd.read_csv(input_file)
+        data = pd.read_csv(
+            input_file, dtype={"business_id": str, "id": str, "phone_number": str}
+        )
 
         # Convert the date column to datetime with UTC
         data[date_column] = pd.to_datetime(data[date_column], errors="coerce", utc=True)

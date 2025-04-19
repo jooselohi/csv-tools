@@ -10,7 +10,9 @@ def remove_column(input_file, column_to_remove, output_file):
     - Saves the data without the specified column to an output CSV file.
     """
     try:
-        data = pd.read_csv(input_file)
+        data = pd.read_csv(
+            input_file, dtype={"business_id": str, "id": str, "phone_number": str}
+        )
 
         if column_to_remove not in data.columns:
             print(f"Column '{column_to_remove}' does not exist in the CSV file.")

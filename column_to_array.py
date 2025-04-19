@@ -16,7 +16,9 @@ def column_to_array(file_path, column_name):
     - Saves the unique values to 'output/column_values.csv'.
     """
     try:
-        data = pd.read_csv(file_path)
+        data = pd.read_csv(
+            file_path, dtype={"business_id": str, "id": str, "phone_number": str}
+        )
 
         if column_name not in data.columns:
             print(f"Column '{column_name}' does not exist in the CSV file.")

@@ -19,7 +19,9 @@ def search_column(file_path, column_name, query, output_path=None):
       Optionally, outputs the results to a CSV file.
     """
     try:
-        data = pd.read_csv(file_path)
+        data = pd.read_csv(
+            file_path, dtype={"business_id": str, "id": str, "phone_number": str}
+        )
 
         if column_name not in data.columns:
             print(f"Column '{column_name}' does not exist in the CSV file.")

@@ -14,7 +14,11 @@ def print_header(file_path):
     """
     try:
         # Using 'nrows=0' to only read the header without loading any data
-        data = pd.read_csv(file_path, nrows=0)
+        data = pd.read_csv(
+            file_path,
+            nrows=0,
+            dtype={"business_id": str, "id": str, "phone_number": str},
+        )
 
         if data.columns.empty:
             print("No header row found in the CSV file.")

@@ -11,7 +11,9 @@ def remove_rows_with_missing_values(input_file, missing_column_header, output_fi
     - Saves the data without rows containing missing values in the specified column to an output CSV file.
     """
     try:
-        data = pd.read_csv(input_file)
+        data = pd.read_csv(
+            input_file, dtype={"business_id": str, "id": str, "phone_number": str}
+        )
 
         if missing_column_header not in data.columns:
             print(f"Column '{missing_column_header}' does not exist in the CSV file.")

@@ -19,7 +19,9 @@ def find_duplicates(file_path, column_name, output_dir=None):
     - Prints the rows with duplicate values in the specified column, grouped by the duplicate values.
     """
     try:
-        data = pd.read_csv(file_path)
+        data = pd.read_csv(
+            file_path, dtype={"business_id": str, "id": str, "phone_number": str}
+        )
 
         if column_name not in data.columns:
             print(f"Column '{column_name}' does not exist in the CSV file.")
